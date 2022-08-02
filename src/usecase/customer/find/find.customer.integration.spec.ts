@@ -33,6 +33,7 @@ describe("Test find customer usecase", () => {
         await customerRepository.create(customer);
 
         const input = { id: "123" }
+
         const output = {
             id: "123",
             name: "César Marino",
