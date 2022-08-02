@@ -2,7 +2,7 @@ import ProductFactory from "./product.factory";
 
 describe("Product factory unit tests", () => {
     it("Should create a product type a", () => {
-        const product = ProductFactory.create("a", "Product A", 1);
+        const product = ProductFactory.createByType("a", "Product A", 1);
 
         expect(product.id).toBeDefined();
         expect(product.name).toBe("Product A");
@@ -11,7 +11,7 @@ describe("Product factory unit tests", () => {
     });
 
     it("Should create a product type b", () => {
-        const product = ProductFactory.create("b", "Product B", 1);
+        const product = ProductFactory.createByType("b", "Product B", 1);
 
         expect(product.id).toBeDefined();
         expect(product.name).toBe("Product B");
@@ -20,6 +20,6 @@ describe("Product factory unit tests", () => {
     });
 
     it("Should throw an error when product type is not suported", () => {
-        expect(() => ProductFactory.create("c", "Product C", 1)).toThrowError("Product type not suported");
+        expect(() => ProductFactory.createByType("c", "Product C", 1)).toThrowError("Product type not suported");
     });
 });
