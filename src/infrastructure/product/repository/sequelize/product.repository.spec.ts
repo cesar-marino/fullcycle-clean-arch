@@ -82,6 +82,14 @@ describe("Product Repository unit tests", () => {
         });
     });
 
+    it("Should throw an error when product is not found", async () => {
+        const productRepository = new ProductRepository();
+
+        expect(async () => {
+            await productRepository.find("456ABC");
+        }).rejects.toThrow("Product not found");
+    });
+
     it("Should find all a product", async () => {
         const productRepository = new ProductRepository();
         const product1 = new Product("1", "Product 1", 100);
