@@ -10,7 +10,7 @@ const mockRepository = () => {
     };
 };
 
-describe("Unit test a create product", () => {
+describe("Unit test a create product use case", () => {
     it("Should create a product", async () => {
         const product = ProductFactory.create("Product 1", 10);
         const productRepository = mockRepository();

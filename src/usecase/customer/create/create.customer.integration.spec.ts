@@ -3,7 +3,7 @@ import CustomerModel from "../../../infrastructure/customer/repository/sequelize
 import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
 import CreateCustomerUseCase from "./create.customer.usecase";
 
-describe("Test create customer", () => {
+describe("Test create customer use case", () => {
     let sequelize: Sequelize;
 
     beforeEach(async () => {

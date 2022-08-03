@@ -12,7 +12,7 @@ const mockRepository = () => {
     };
 };
 
-describe("Unit test find product", () => {
+describe("Unit test find product use case", () => {
     it("Should find product", async () => {
         const productRepository = mockRepository();
         const usecase = new FindProductUseCase(productRepository);
@@ -21,5 +21,16 @@ describe("Unit test find product", () => {
         const output = await usecase.execute(input);
 
         expect(output).toEqual({ id: product.id, name: product.name, price: product.price });
+    });
+
+    it("Should not find product", async () => {
+        const productRepository = mockRepository();
+        productRepository.find.mockImplementation(() => {
+            throw Error("Product not found");
+        });
+        const usecase = new FindProductUseCase(productRepository);
+        const input = { id: "123" }
+
+        expect(() => usecase.execute(input)).rejects.toThrow("Product not found");
     });
 });

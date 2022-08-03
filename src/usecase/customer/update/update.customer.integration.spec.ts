@@ -5,7 +5,7 @@ import CustomerModel from "../../../infrastructure/customer/repository/sequelize
 import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
 import UpdateCustomerUsecase from "./update.customer.usecase";
 
-describe("Test updated customer", () => {
+describe("Test updated customer use case", () => {
     let sequelize: Sequelize;
 
     beforeEach(async () => {
