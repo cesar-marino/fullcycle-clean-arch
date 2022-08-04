@@ -65,4 +65,19 @@ describe("E2E test for product", () => {
         expect(updateResponse.body.name).toBe("Product 2");
         expect(updateResponse.body.price).toBe(50.50);
     });
+
+    it("Should get a product", async () => {
+        const response = await request(app)
+            .post("/product")
+            .send({ name: "Product 1", price: 50 });
+
+        expect(response.status).toBe(200);
+
+        const getResponse = await request(app).get(`/product/${response.body.id}`).send();
+
+        expect(getResponse.status).toBe(200);
+        expect(getResponse.body.id).toBe(response.body.id);
+        expect(getResponse.body.name).toBe("Product 1");
+        expect(getResponse.body.price).toBe(50);
+    });
 });

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import CreateProductUseCase from '../../../usecase/product/create/create.product.usecase';
+import FindProductUseCase from '../../../usecase/product/find/find.product.usecase';
 import ListProductUseCase from '../../../usecase/product/list/list.product.usecase';
 import UpdateProductUsecase from '../../../usecase/product/update/update.product.usecase';
 import ProductRepository from '../../product/repository/sequelize/product.repository';
@@ -35,6 +36,17 @@ productRoute.get("/", async (req: Request, res: Response) => {
 
     try {
         const output = await usecase.execute({});
+        res.send(output);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+productRoute.get("/:id", async (req: Request, res: Response) => {
+    const usecase = new FindProductUseCase(new ProductRepository());
+
+    try {
+        const output = await usecase.execute({ id: req.params.id });
         res.send(output);
     } catch (err) {
         res.status(500).send(err);
