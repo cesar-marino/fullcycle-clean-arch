@@ -108,4 +108,25 @@ describe("E2E test for customer", () => {
         expect(updateResponse.body.address.zip).toBe("Zip 2");
         expect(updateResponse.body.address.city).toBe("City 2");
     });
+
+    it("Should get customer", async () => {
+        const response = await request(app)
+            .post("/customer")
+            .send({
+                name: "César Marino",
+                address: {
+                    street: "Street 1",
+                    number: 123,
+                    zip: "Zip 1",
+                    city: "City 1",
+                },
+            });
+
+        expect(response.status).toBe(200);
+
+        const getResponse = await request(app).get(`/customer/${response.body.id}`).send();
+        expect(getResponse.status).toBe(200);
+        expect(getResponse.body.name).toBe("César Marino");
+        expect(getResponse.body.address.street).toBe("Street 1");
+    });
 });

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import CreateCustomerUseCase from '../../../usecase/customer/create/create.customer.usecase';
+import FindCustomerUseCase from '../../../usecase/customer/find/find.customer.usecase';
 import ListCustomerUsecase from '../../../usecase/customer/list/list.customer.usecases';
 import UpdateCustomerUsecase from '../../../usecase/customer/update/update.customer.usecase';
 import CustomerRepository from '../../customer/repository/sequelize/customer.repository';
@@ -54,6 +55,17 @@ customerRoute.get("/", async (req: Request, res: Response) => {
 
     try {
         const output = await usecase.execute({});
+        res.send(output);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+customerRoute.get("/:id", async (req: Request, res: Response) => {
+    const usecase = new FindCustomerUseCase(new CustomerRepository());
+
+    try {
+        const output = await usecase.execute({ id: req.params.id });
         res.send(output);
     } catch (err) {
         res.status(500).send(err);
