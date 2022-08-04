@@ -34,8 +34,6 @@ export default class Product extends Entity implements ProductInterface {
         return true;
     }
 
-
-
     get name(): string {
         return this._name;
     }
